@@ -128,5 +128,5 @@ async def run_model(response: Response, session_id: UUID = Depends(cookie)):
 
 if __name__ == "__main__":
     uvicorn.run(
-        app, host="0.0.0.0", port=8000, workers=4
+        app, host="0.0.0.0", port=os.getenv("PORT"), workers=1
     )
