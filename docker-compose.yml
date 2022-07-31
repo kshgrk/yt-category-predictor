@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  dev:
+    # image: cr0nus/aws-box:dev
+    container_name: fastapi-yt-predictor
+    build:
+      context: .
+        #    stdin_open: true # docker run -i
+        #     tty: true # docker run -t
+    ports:
+      - 8000:8000
+
