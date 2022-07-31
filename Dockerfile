@@ -7,6 +7,4 @@ COPY ./ /app/src
 
 WORKDIR /app/src
 
-EXPOSE 8000
-
 CMD ["python", "main.py"]
