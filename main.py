@@ -102,7 +102,7 @@ async def del_session(response: Response, session_id: UUID = Depends(cookie)):
 
 @app.post("/upload_file")
 async def create_upload_file(response: Response, session_id: UUID = Depends(cookie), file: UploadFile = File(...)):
-    path = os.path.join("./", str(session_id))
+    path = os.path.join("./UserSessions", str(session_id))
     if os.path.exists(path) == False:
         os.mkdir(path)
     if file.filename.endswith('.csv'):
@@ -121,10 +121,10 @@ async def create_upload_file(response: Response, session_id: UUID = Depends(cook
 
 @app.get("/model")
 async def run_model(response: Response, session_id: UUID = Depends(cookie)):
-    path = os.path.join("./", str(session_id))
-    setup()
-    sb = pd.read_csv(path, 'submission.csv')
-    return FileResponse(path+'submission.csv')
+    path = os.path.join("./UserSessions", str(session_id))
+    setup(path)
+    sb = pd.read_csv(os.path.join(path, 'output.csv'))
+    return FileResponse(os.path.join(path, 'output.csv'))
 
 if __name__ == "__main__":
     uvicorn.run(
