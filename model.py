@@ -7,9 +7,9 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import SGDClassifier
 import os
 
-def setup():
-    train = pd.read_csv('train.csv')
-    test = pd.read_csv('test.csv') 
+def setup(path):
+    train = pd.read_csv(os.path.join(path, 'train.csv'))
+    test = pd.read_csv(os.path.join(path, 'test.csv'))
 
     target = train['category_id']
     limit = train.shape[0]
@@ -50,5 +50,4 @@ def setup():
     submission['category_id'] = y_pred
 
     submission['category_id'] = submission['category_id'].astype(int)
-    submission.to_csv('submission.csv', index=False)
-
+    submission.to_csv(os.path.join(path, 'output.csv'), index=False)
